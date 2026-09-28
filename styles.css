@@ -87,6 +87,7 @@ button { color: inherit; }
 .area-featured p { margin: 2px 0 47px; color: rgba(255,255,255,.64); font-size: 13px; }
 .area-featured a { width: max-content; border-bottom: 1px solid rgba(255,255,255,.6); padding-bottom: 5px; font-size: 12px; }
 .area-featured a span { margin-left: 28px; }
+.featured-links { display: flex; flex-wrap: wrap; gap: 15px 20px; }
 .area-list { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
 .area-list li { min-height: 70px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-weight: 600; }
 .area-list a { display: flex; min-height: 70px; align-items: center; gap: 15px; padding: 0 22px; transition: color .2s, background .2s; }

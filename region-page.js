@@ -38,4 +38,18 @@ gradeGuide.innerHTML = `
 `;
 document.querySelector(".fit").before(gradeGuide);
 
+if (currentRegion === "전주시") {
+  const districtGuide = document.createElement("section");
+  districtGuide.className = "section district-nav";
+  districtGuide.innerHTML = `
+    <p class="eyebrow">JEONJU 2 DISTRICTS</p>
+    <h2>거주 지역을 선택하세요.</h2>
+    <div class="district-links">
+      <a href="jeonju-wansan-gu.html">전주시 완산구</a>
+      <a href="jeonju-deokjin-gu.html">전주시 덕진구</a>
+    </div>
+  `;
+  document.querySelector(".area-nav").before(districtGuide);
+}
+
 document.querySelector("#year").textContent = new Date().getFullYear();

@@ -42,6 +42,10 @@ a { color: inherit; text-decoration: none; }
 .fit-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 .fit-list li { padding: 20px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
 .fit-list li::before { margin-right: 14px; color: var(--accent); content: "+"; }
+.district-nav { background: var(--paper); }
+.district-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 35px; }
+.district-links a { min-width: 160px; border: 1px solid var(--teal); padding: 15px 22px; text-align: center; font-weight: 700; }
+.district-links a:hover,.district-links a[aria-current="page"] { color: var(--white); background: var(--teal); }
 .area-nav { color: var(--white); background: var(--teal); }
 .area-nav .eyebrow { color: #ff9c84; }
 .area-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 35px; }

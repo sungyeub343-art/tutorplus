@@ -6,6 +6,8 @@
     <priority>1.0</priority>
   </url>
   <url><loc>https://tutorplus.kr/regions/jeonju-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/jeonju-wansan-gu.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/jeonju-deokjin-gu.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tutorplus.kr/regions/gunsan-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tutorplus.kr/regions/iksan-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tutorplus.kr/regions/jeongeup-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
