@@ -29,6 +29,15 @@ a { color: inherit; text-decoration: none; }
 .feature-grid span { color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
 .feature-grid h3 { margin: 45px 0 12px; font: 700 24px "Gowun Batang",serif; }
 .feature-grid p { margin: 0; color: var(--muted); font-size: 14px; }
+.grade-guide { color: var(--white); background: var(--deep); }
+.grade-heading { display: grid; grid-template-columns: .85fr 1.15fr; gap: 18px 9vw; }
+.grade-heading .eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
+.grade-heading > p:last-child { align-self: end; margin: 0; color: rgba(255,255,255,.67); }
+.transition-grid { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 70px; border-top: 1px solid rgba(255,255,255,.28); }
+.transition-grid article { min-height: 190px; padding: 28px; border-right: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+.transition-grid article:nth-child(3n) { border-right: 0; }
+.transition-grid span { color: #ff9c84; font-weight: 700; }
+.transition-grid p { margin: 25px 0 0; color: rgba(255,255,255,.65); font-size: 13px; }
 .fit { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8vw; background: var(--sand); }
 .fit-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 .fit-list li { padding: 20px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
@@ -50,11 +59,14 @@ a { color: inherit; text-decoration: none; }
   .hero-copy { font-size: 14px; }
   .hero-actions { align-items: flex-start; flex-direction: column; }
   .section { padding: 78px 23px; }
-  .intro,.fit { grid-template-columns: 1fr; gap: 35px; }
+  .intro,.fit,.grade-heading { grid-template-columns: 1fr; gap: 35px; }
+  .grade-heading .eyebrow { grid-column: auto; margin-bottom: -18px; }
   .feature-grid { grid-template-columns: 1fr; margin-top: 50px; }
   .feature-grid article { min-height: 0; padding: 27px 0; }
   .feature-grid article + article { border-top: 1px solid var(--line); border-left: 0; }
   .feature-grid h3 { margin-top: 18px; }
+  .transition-grid { grid-template-columns: 1fr; margin-top: 50px; }
+  .transition-grid article,.transition-grid article:nth-child(3n) { min-height: 0; padding: 25px 0; border-right: 0; }
   .site-footer { flex-direction: column; padding-bottom: 92px; }
   .floating-phone { position: fixed; z-index: 10; right: 14px; bottom: 14px; left: 14px; display: flex; height: 54px; align-items: center; justify-content: center; color: var(--white); background: var(--accent); box-shadow: 0 8px 25px rgba(0,0,0,.24); font-weight: 700; }
 }
