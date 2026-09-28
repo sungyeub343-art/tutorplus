@@ -5,4 +5,18 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://tutorplus.kr/regions/jeonju-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/gunsan-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/iksan-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/jeongeup-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/namwon-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/gimje-si.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/wanju-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/jinan-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/muju-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/jangsu-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/imsil-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/sunchang-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/gochang-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tutorplus.kr/regions/buan-gun.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
