@@ -112,6 +112,7 @@ button { color: inherit; }
 .form-honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .consult-form label:not(.agreement) { display: grid; gap: 6px; color: var(--muted); font-size: 11px; font-weight: 600; }
+.field-note { font-weight: 400; }
 .consult-form input, .consult-form select, .consult-form textarea { width: 100%; border: 0; border-bottom: 1px solid rgba(23,37,36,.34); border-radius: 0; padding: 11px 2px; color: var(--ink); background: transparent; outline: 0; }
 .consult-form input:focus, .consult-form select:focus, .consult-form textarea:focus { border-color: var(--accent); }
 .consult-form textarea { resize: vertical; }
