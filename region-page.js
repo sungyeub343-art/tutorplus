@@ -7,6 +7,14 @@ const regionLinks = [
 ];
 
 const currentRegion = document.body.dataset.region;
+document.querySelectorAll(".brand-mark").forEach((mark) => mark.setAttribute("aria-hidden", "true"));
+
+const favicon = document.createElement("link");
+favicon.rel = "icon";
+favicon.type = "image/svg+xml";
+favicon.href = "../assets/logo-mark.svg";
+document.head.append(favicon);
+
 document.querySelector(".area-links").innerHTML = regionLinks.map(([name, slug]) =>
   `<a href="${slug}.html"${name === currentRegion ? ' aria-current="page"' : ""}>${name}</a>`
 ).join("");
