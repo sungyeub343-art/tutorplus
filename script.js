@@ -19,6 +19,28 @@ const gradeContent = {
   },
 };
 
+const regionModal = document.querySelector("#region-modal");
+const regionModalPanel = regionModal.querySelector(".region-modal-panel");
+const regionModalClose = regionModal.querySelector(".region-modal-close");
+
+const closeRegionModal = () => {
+  regionModal.hidden = true;
+  document.body.classList.remove("region-modal-open");
+};
+
+regionModalClose.focus();
+regionModalClose.addEventListener("click", closeRegionModal);
+regionModal.addEventListener("click", (event) => {
+  if (!regionModalPanel.contains(event.target)) {
+    closeRegionModal();
+  }
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !regionModal.hidden) {
+    closeRegionModal();
+  }
+});
+
 const menuButton = document.querySelector(".menu-button");
 const navigation = document.querySelector(".primary-nav");
 
