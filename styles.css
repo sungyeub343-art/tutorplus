@@ -50,8 +50,8 @@ button { color: inherit; }
 .hero-content { position: relative; z-index: 1; width: min(760px, 83%); margin-left: clamp(24px, 10vw, 170px); padding-top: 74px; animation: rise-in .8s .15s ease-out both; }
 .eyebrow { margin: 0 0 20px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .22em; }
 .eyebrow.light { color: #ff9c84; }
-.hero h1, .section-title h2, .program h2, .area h2, .process h2, .consult h2 { margin: 0; font-family: "Gowun Batang", serif; font-size: clamp(38px, 4.8vw, 68px); line-height: 1.3; letter-spacing: 0; }
-.hero h1 em { color: #ff9b82; font-style: normal; }
+.hero-title, .section-title h2, .program h2, .area h2, .process h2, .consult h2 { margin: 0; font-family: "Gowun Batang", serif; font-size: clamp(38px, 4.8vw, 68px); line-height: 1.3; letter-spacing: 0; }
+.hero-title em { color: #ff9b82; font-style: normal; }
 .hero-copy { max-width: 610px; margin: 27px 0 0; color: rgba(255,255,255,.8); font-size: 16px; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 30px; margin-top: 40px; }
 .button { display: inline-flex; min-height: 57px; align-items: center; justify-content: space-between; gap: 40px; border: 0; padding: 0 26px; font-weight: 700; cursor: pointer; }
@@ -118,6 +118,30 @@ button { color: inherit; }
 .process-list strong { font-size: 18px; }
 .process-list p { margin: 6px 0 0; color: rgba(255,255,255,.56); font-size: 13px; }
 
+.hero-kicker { margin: 0 0 20px; color: #ff9c84; font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.hero-kicker span { margin-left: 8px; color: rgba(255,255,255,.72); font-size: 13px; font-weight: 500; }
+.hero-title { font-weight: 700; }
+
+.levels { background: #f4f1e9; }
+.level-cards { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 70px; border-top: 1px solid var(--ink); }
+.level-card { padding: 32px 30px 10px; }
+.level-card + .level-card { border-left: 1px solid rgba(23,37,36,.16); }
+.level-card > span { color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+.level-card h3 { margin: 20px 0 6px; font-family: "Gowun Batang", serif; font-size: 26px; }
+.level-card > p { margin: 0 0 18px; color: var(--muted); font-size: 13px; }
+.level-card dl { margin: 0; }
+.level-card dt { padding-top: 16px; border-top: 1px solid rgba(23,37,36,.16); font-size: 15px; font-weight: 700; }
+.level-card dd { margin: 6px 0 16px; color: var(--muted); font-size: 14px; }
+
+.faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 0 8vw; }
+.faq-list { border-top: 1px solid var(--ink); }
+.faq-list details { border-bottom: 1px solid rgba(23,37,36,.16); }
+.faq-list summary { position: relative; padding: 20px 36px 20px 0; font-weight: 700; cursor: pointer; list-style: none; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { position: absolute; top: 18px; right: 4px; color: var(--accent); content: "+"; font-size: 20px; }
+.faq-list details[open] summary::after { content: "−"; }
+.faq-list details p { margin: 0 0 22px; color: var(--muted); font-size: 14px; }
+
 .consult { padding: 120px clamp(24px, 10vw, 170px); background: #e9e3d7; }
 .consult-copy > p:not(.eyebrow) { max-width: 440px; margin-top: 22px; color: var(--muted); }
 .consult-phone { display: block; width: max-content; margin-top: 45px; border-bottom: 1px solid var(--ink); padding-bottom: 8px; font-size: 20px; font-weight: 700; }
@@ -153,6 +177,10 @@ button { color: inherit; }
   .area-featured { min-height: 275px; }
   .process-list { grid-template-columns: repeat(2, 1fr); row-gap: 55px; }
   .process-list li:nth-child(2)::after { display: none; }
+  .level-cards { grid-template-columns: 1fr; margin-top: 50px; }
+  .level-card { padding: 27px 0 5px; }
+  .level-card + .level-card { border-top: 1px solid var(--ink); border-left: 0; }
+  .faq { grid-template-columns: 1fr; gap: 40px; }
   .site-footer { grid-template-columns: 1fr 1fr; }
   .site-footer > p { grid-column: 1 / -1; }
 }
@@ -172,7 +200,7 @@ button { color: inherit; }
   .hero-photo { background-position: 62% center; }
   .hero-shade { background: linear-gradient(90deg, rgba(8,38,37,.94), rgba(8,38,37,.52)), linear-gradient(0deg, rgba(4,20,20,.65), transparent 60%); }
   .hero-content { width: auto; margin: 0; padding: 0 23px; }
-  .hero h1 { font-size: 33px; }
+  .hero-title { font-size: 33px; }
   .hero-copy { font-size: 14px; }
   .hero-actions { align-items: stretch; flex-direction: column; gap: 19px; margin-top: 30px; }
   .button-accent { width: 100%; }
