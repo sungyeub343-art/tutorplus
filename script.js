@@ -87,19 +87,4 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 
-const consultationForm = document.querySelector("#consult-form");
-const formStatus = consultationForm.querySelector(".form-status");
-consultationForm.addEventListener("submit", (event) => {
-  if (!consultationForm.checkValidity()) {
-    event.preventDefault();
-    consultationForm.reportValidity();
-    return;
-  }
-  formStatus.textContent = "상담 내용을 전송하고 있습니다.";
-});
-
-if (new URLSearchParams(window.location.search).get("submitted") === "true") {
-  formStatus.textContent = "상담 신청이 완료되었습니다. 확인 후 연락드리겠습니다.";
-}
-
 document.querySelector("#year").textContent = new Date().getFullYear();

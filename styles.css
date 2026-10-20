@@ -118,24 +118,10 @@ button { color: inherit; }
 .process-list strong { font-size: 18px; }
 .process-list p { margin: 6px 0 0; color: rgba(255,255,255,.56); font-size: 13px; }
 
-.consult { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(55px, 10vw, 150px); padding: 120px clamp(24px, 10vw, 170px); background: #e9e3d7; }
+.consult { padding: 120px clamp(24px, 10vw, 170px); background: #e9e3d7; }
 .consult-copy > p:not(.eyebrow) { max-width: 440px; margin-top: 22px; color: var(--muted); }
 .consult-phone { display: block; width: max-content; margin-top: 45px; border-bottom: 1px solid var(--ink); padding-bottom: 8px; font-size: 20px; font-weight: 700; }
 .consult-phone small { margin-right: 18px; color: var(--muted); font-size: 11px; font-weight: 500; }
-.consult-form { display: grid; gap: 20px; align-content: center; }
-.form-honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.consult-form label:not(.agreement) { display: grid; gap: 6px; color: var(--muted); font-size: 11px; font-weight: 600; }
-.field-note { font-weight: 400; }
-.consult-form input, .consult-form select, .consult-form textarea { width: 100%; border: 0; border-bottom: 1px solid rgba(23,37,36,.34); border-radius: 0; padding: 11px 2px; color: var(--ink); background: transparent; outline: 0; }
-.consult-form input:focus, .consult-form select:focus, .consult-form textarea:focus { border-color: var(--accent); }
-.consult-form textarea { resize: vertical; }
-.consult-form ::placeholder { color: #9a9f9c; }
-.agreement { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 11px; cursor: pointer; }
-.agreement input { width: 16px; height: 16px; accent-color: var(--accent); }
-.submit-button { width: 100%; margin-top: 3px; color: var(--white); background: var(--accent); }
-.submit-button:hover { background: #d9553a; }
-.form-status { min-height: 22px; margin: -9px 0 0; color: #a13c2a; font-size: 12px; }
 
 .site-footer { display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; gap: 50px; padding: 50px clamp(24px, 5vw, 80px); color: rgba(255,255,255,.62); background: #0a2322; font-size: 11px; }
 .site-footer .brand { color: var(--white); }
@@ -167,7 +153,6 @@ button { color: inherit; }
   .area-featured { min-height: 275px; }
   .process-list { grid-template-columns: repeat(2, 1fr); row-gap: 55px; }
   .process-list li:nth-child(2)::after { display: none; }
-  .consult { grid-template-columns: 1fr; }
   .site-footer { grid-template-columns: 1fr 1fr; }
   .site-footer > p { grid-column: 1 / -1; }
 }
@@ -211,8 +196,7 @@ button { color: inherit; }
   .area-list li:last-child { border-bottom: 0; }
   .process-list { grid-template-columns: 1fr; row-gap: 43px; }
   .process-list li:not(:last-child)::after { top: auto; right: 50%; bottom: -32px; content: "↓"; }
-  .consult { gap: 52px; padding: 88px 23px; }
-  .form-row { grid-template-columns: 1fr; gap: 20px; }
+  .consult { padding: 88px 23px; }
   .site-footer { grid-template-columns: 1fr; gap: 27px; padding-bottom: 105px; }
   .site-footer > p { grid-column: auto; }
   .floating-button { display: grid; }
