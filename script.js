@@ -28,7 +28,23 @@ const closeRegionModal = () => {
   document.body.classList.remove("region-modal-open");
 };
 
-regionModalClose.focus();
+// 같은 방문 중 다시 홈으로 돌아오면 지역 선택 창을 띄우지 않는다.
+const regionModalSeenKey = "regionModalSeen";
+let regionModalSeen = false;
+try {
+  regionModalSeen = sessionStorage.getItem(regionModalSeenKey) === "1";
+  sessionStorage.setItem(regionModalSeenKey, "1");
+} catch (error) {}
+let fromSameSite = false;
+try {
+  fromSameSite = new URL(document.referrer).origin === window.location.origin;
+} catch (error) {}
+
+if (regionModalSeen || fromSameSite) {
+  closeRegionModal();
+} else {
+  regionModalClose.focus();
+}
 regionModalClose.addEventListener("click", closeRegionModal);
 regionModal.addEventListener("click", (event) => {
   if (!regionModalPanel.contains(event.target)) {
