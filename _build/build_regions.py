@@ -198,7 +198,9 @@ def build(index, region):
   <meta property="og:image" content="{SITE}/assets/og-image.jpg?v=20261008">
   <meta property="og:locale" content="ko_KR">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="icon" href="../assets/logo-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
   <link rel="stylesheet" href="../region-page.css">
   {jsonld(schema)}
 </head>
