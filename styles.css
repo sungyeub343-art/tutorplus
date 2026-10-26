@@ -133,6 +133,23 @@ button { color: inherit; }
 .level-card dt { padding-top: 16px; border-top: 1px solid rgba(23,37,36,.16); font-size: 15px; font-weight: 700; }
 .level-card dd { margin: 6px 0 16px; color: var(--muted); font-size: 14px; }
 
+.schools { background: #ebe5d9; }
+.schools-copy { max-width: 720px; margin: 25px 0 0; color: var(--muted); }
+.school-regions { margin-top: 50px; border-top: 1px solid var(--ink); }
+.school-region { border-bottom: 1px solid rgba(23,37,36,.16); }
+.school-region summary { position: relative; padding: 20px 36px 20px 0; font-weight: 700; cursor: pointer; list-style: none; }
+.school-region summary::-webkit-details-marker { display: none; }
+.school-region summary::after { position: absolute; top: 18px; right: 4px; color: var(--accent); content: "+"; font-size: 20px; }
+.school-region[open] summary::after { content: "−"; }
+.school-region summary small { margin-left: 8px; color: var(--muted); font-weight: 500; }
+.school-region .school-cols { margin-top: 5px; }
+.school-more { display: inline-block; margin: 22px 0 26px; border-bottom: 1px solid var(--ink); font-size: 13px; font-weight: 700; }
+.school-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; margin-top: 55px; }
+.school-col h3, .school-col h4 { margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); font-size: 16px; }
+.school-col small { margin-left: 6px; color: var(--accent); font-size: 12px; }
+.school-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.school-list li { border: 1px solid rgba(23,37,36,.16); padding: 3px 9px; color: var(--muted); font-size: 12px; }
+
 .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 0 8vw; }
 .faq-list { border-top: 1px solid var(--ink); }
 .faq-list details { border-bottom: 1px solid rgba(23,37,36,.16); }
@@ -181,6 +198,7 @@ button { color: inherit; }
   .level-card { padding: 27px 0 5px; }
   .level-card + .level-card { border-top: 1px solid var(--ink); border-left: 0; }
   .faq { grid-template-columns: 1fr; gap: 40px; }
+  .school-cols { grid-template-columns: 1fr; gap: 30px; }
   .site-footer { grid-template-columns: 1fr 1fr; }
   .site-footer > p { grid-column: 1 / -1; }
 }

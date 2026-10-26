@@ -10,7 +10,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://tutorplus.kr"
 PHONE = "010-2928-3614"
 TEL = "tel:01029283614"
-UPDATED = "2026-10-20"
+UPDATED = "2026-10-26"
+
+# 전국초중등학교위치표준데이터(2026-10-26)에서 추출한 전북 운영 학교 목록
+SCHOOLS = json.loads((ROOT / "_build" / "schools.json").read_text(encoding="utf-8"))["regions"]
+SCHOOL_LEVELS = [("elementary", "초등학교"), ("middle", "중학교"), ("high", "고등학교")]
 
 # slug, 행정구역명, 검색용 지역명, 배경 글자, 영문, 대표 동네
 REGIONS = [
@@ -97,6 +101,38 @@ def faqs(s, dongs):
     ]
 
 
+def school_columns(s, schools, tag="h3"):
+    return "".join(
+        f'<div class="school-col"><{tag}>{s} {label} 수학과외 <small>{len(schools[key])}곳</small></{tag}>'
+        f'<ul class="school-list">{"".join(f"<li>{n}</li>" for n in schools[key])}</ul></div>'
+        for key, label in SCHOOL_LEVELS
+    )
+
+
+def build_index_schools():
+    """index.html 의 <!-- schools:start --> ~ <!-- schools:end --> 구간을 다시 쓴다."""
+    total = sum(len(SCHOOLS[r[0]][k]) for r in REGIONS if not r[0].endswith("-gu") for k, _ in SCHOOL_LEVELS)
+    groups = "".join(
+        f"""
+        <details class="school-region"><summary>{r[2]} 초·중·고 <small>{sum(len(SCHOOLS[r[0]][k]) for k, _ in SCHOOL_LEVELS)}곳</small></summary>
+          <div class="school-cols">{school_columns(r[2], SCHOOLS[r[0]], "h4")}</div>
+          <a class="school-more" href="regions/{r[0]}.html">{r[2]} 수학과외 안내 보기 →</a>
+        </details>"""
+        for r in REGIONS if not r[0].endswith("-gu")
+    )
+    return f"""<!-- schools:start -->
+    <section class="schools section" id="schools" aria-labelledby="schools-title">
+      <div class="section-title reveal">
+        <p class="eyebrow">JEONBUK SCHOOLS</p>
+        <h2 id="schools-title">전북 초등학교·중학교·고등학교<br>학교별 수학과외</h2>
+      </div>
+      <p class="schools-copy reveal">전북특별자치도 14개 시군의 초등학교, 중학교, 고등학교 {total}곳 학생을 대상으로 학교 진도와 시험 범위에 맞춘 1:1 수학과외를 안내합니다. 지역을 눌러 학교 목록을 확인하세요.</p>
+      <div class="school-regions">{groups}
+      </div>
+    </section>
+    <!-- schools:end -->"""
+
+
 def esc(text):
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
@@ -138,6 +174,20 @@ def build(index, region):
         fit_items.insert(2, EXTRA_FIT[slug])
     fit_html = "".join(f"<li>{t}</li>" for t in fit_items)
     faq_html = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in faq_items)
+
+    schools = SCHOOLS[slug]
+    school_total = sum(len(schools[k]) for k, _ in SCHOOL_LEVELS)
+    schools_html = f"""
+    <section class="section schools">
+      <div class="grade-heading">
+        <p class="eyebrow">{eng} SCHOOLS</p>
+        <h2>{s} 초·중·고<br>학교별 수학과외</h2>
+        <p>{name}의 초등학교·중학교·고등학교 {school_total}곳 학생을 대상으로, 다니는 학교의 진도와 시험 범위, 출제 경향에 맞춰 수학 수업을 준비합니다.</p>
+      </div>
+      <div class="school-cols">{school_columns(s, schools)}</div>
+      <p class="school-source">학교 목록 출처: 전국초중등학교위치표준데이터(2026.10 기준)</p>
+    </section>
+"""
 
     district_html = ""
     if slug.startswith("jeonju"):
@@ -264,7 +314,7 @@ def build(index, region):
       </div>
       <ul class="fit-list">{fit_html}</ul>
     </section>
-
+{schools_html}
     <section class="section faq">
       <p class="eyebrow">FAQ</p>
       <h2>{s} 수학과외<br>자주 묻는 질문</h2>
@@ -306,4 +356,8 @@ if __name__ == "__main__":
     for i, region in enumerate(REGIONS):
         (ROOT / "regions" / f"{region[0]}.html").write_text(build(i, region), encoding="utf-8")
     (ROOT / "sitemap.xml").write_text(build_sitemap(), encoding="utf-8")
+    index = ROOT / "index.html"
+    html = index.read_text(encoding="utf-8")
+    start, end = html.index("<!-- schools:start -->"), html.index("<!-- schools:end -->") + len("<!-- schools:end -->")
+    index.write_text(html[:start] + build_index_schools() + html[end:], encoding="utf-8")
     print(f"{len(REGIONS)} region pages + sitemap.xml written")
