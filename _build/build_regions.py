@@ -10,10 +10,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://tutorplus.kr"
 PHONE = "010-2928-3614"
 TEL = "tel:01029283614"
-UPDATED = "2026-10-26"
+UPDATED = "2026-10-28"
 
 # 전국초중등학교위치표준데이터(2026-10-26)에서 추출한 전북 운영 학교 목록
 SCHOOLS = json.loads((ROOT / "_build" / "schools.json").read_text(encoding="utf-8"))["regions"]
+SCHOOL_IDS = {d["name"]: d["id"] for d in json.loads((ROOT / "_build" / "school_details.json").read_text(encoding="utf-8"))}
 SCHOOL_LEVELS = [("elementary", "초등학교"), ("middle", "중학교"), ("high", "고등학교")]
 
 # slug, 행정구역명, 검색용 지역명, 배경 글자, 영문, 대표 동네
@@ -101,10 +102,10 @@ def faqs(s, dongs):
     ]
 
 
-def school_columns(s, schools, tag="h3"):
+def school_columns(s, schools, tag="h3", prefix="../"):
     return "".join(
         f'<div class="school-col"><{tag}>{s} {label} 수학과외 <small>{len(schools[key])}곳</small></{tag}>'
-        f'<ul class="school-list">{"".join(f"<li>{n}</li>" for n in schools[key])}</ul></div>'
+        f'<ul class="school-list">{"".join(f'<li><a href="{prefix}schools/{SCHOOL_IDS[n]}.html">{n}</a></li>' for n in schools[key])}</ul></div>'
         for key, label in SCHOOL_LEVELS
     )
 
@@ -115,7 +116,7 @@ def build_index_schools():
     groups = "".join(
         f"""
         <details class="school-region"><summary>{r[2]} 초·중·고 <small>{sum(len(SCHOOLS[r[0]][k]) for k, _ in SCHOOL_LEVELS)}곳</small></summary>
-          <div class="school-cols">{school_columns(r[2], SCHOOLS[r[0]], "h4")}</div>
+          <div class="school-cols">{school_columns(r[2], SCHOOLS[r[0]], "h4", "")}</div>
           <a class="school-more" href="regions/{r[0]}.html">{r[2]} 수학과외 안내 보기 →</a>
         </details>"""
         for r in REGIONS if not r[0].endswith("-gu")
@@ -343,8 +344,9 @@ def build(index, region):
 """
 
 
-def build_sitemap():
+def build_sitemap(school_urls):
     urls = [(f"{SITE}/", "weekly", "1.0")] + [(f"{SITE}/regions/{r[0]}.html", "monthly", "0.8") for r in REGIONS]
+    urls += [(u, "monthly", "0.6") for u in school_urls]
     rows = "\n".join(
         f"  <url><loc>{loc}</loc><lastmod>{UPDATED}</lastmod><changefreq>{freq}</changefreq><priority>{prio}</priority></url>"
         for loc, freq, prio in urls
@@ -355,9 +357,11 @@ def build_sitemap():
 if __name__ == "__main__":
     for i, region in enumerate(REGIONS):
         (ROOT / "regions" / f"{region[0]}.html").write_text(build(i, region), encoding="utf-8")
-    (ROOT / "sitemap.xml").write_text(build_sitemap(), encoding="utf-8")
+    import build_schools
+    school_urls = build_schools.write_all()
+    (ROOT / "sitemap.xml").write_text(build_sitemap(school_urls), encoding="utf-8")
     index = ROOT / "index.html"
     html = index.read_text(encoding="utf-8")
     start, end = html.index("<!-- schools:start -->"), html.index("<!-- schools:end -->") + len("<!-- schools:end -->")
     index.write_text(html[:start] + build_index_schools() + html[end:], encoding="utf-8")
-    print(f"{len(REGIONS)} region pages + sitemap.xml written")
+    print(f"{len(REGIONS)} region pages, {len(school_urls)} school pages + sitemap.xml written")

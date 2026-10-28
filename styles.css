@@ -148,6 +148,8 @@ button { color: inherit; }
 .school-col h3, .school-col h4 { margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); font-size: 16px; }
 .school-col small { margin-left: 6px; color: var(--accent); font-size: 12px; }
 .school-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.school-list a { display: block; }
+.school-list li:has(a:hover) { border-color: var(--accent); color: var(--accent); }
 .school-list li { border: 1px solid rgba(23,37,36,.16); padding: 3px 9px; color: var(--muted); font-size: 12px; }
 
 .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 0 8vw; }
