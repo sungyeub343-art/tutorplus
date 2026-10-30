@@ -102,9 +102,11 @@ def faqs(s, dongs):
     ]
 
 
-def school_columns(s, schools, tag="h3", prefix="../"):
+def school_columns(s, schools, tag="h3", prefix="../", slug=None):
     return "".join(
-        f'<div class="school-col"><{tag}>{s} {label} 수학과외 <small>{len(schools[key])}곳</small></{tag}>'
+        f'<div class="school-col"><{tag}>'
+        + (f'<a href="{prefix}regions/{slug}-{key}.html">{s} {label} 수학과외</a>' if slug else f"{s} {label} 수학과외")
+        + f' <small>{len(schools[key])}곳</small></{tag}>'
         f'<ul class="school-list">{"".join(f'<li><a href="{prefix}schools/{SCHOOL_IDS[n]}.html">{n}</a></li>' for n in schools[key])}</ul></div>'
         for key, label in SCHOOL_LEVELS
     )
@@ -116,7 +118,7 @@ def build_index_schools():
     groups = "".join(
         f"""
         <details class="school-region"><summary>{r[2]} 초·중·고 <small>{sum(len(SCHOOLS[r[0]][k]) for k, _ in SCHOOL_LEVELS)}곳</small></summary>
-          <div class="school-cols">{school_columns(r[2], SCHOOLS[r[0]], "h4", "")}</div>
+          <div class="school-cols">{school_columns(r[2], SCHOOLS[r[0]], "h4", "", r[0])}</div>
           <a class="school-more" href="regions/{r[0]}.html">{r[2]} 수학과외 안내 보기 →</a>
         </details>"""
         for r in REGIONS if not r[0].endswith("-gu")
@@ -158,8 +160,9 @@ def build(index, region):
           <h3>{s} {heading}</h3>
           <p class="level-lead">{lead}</p>
           <dl>{"".join(f"<dt>{s} {kw}</dt><dd>{body}</dd>" for kw, body in items)}</dl>
+          <a class="level-more" href="{slug}-{key}.html">{s} {heading} 자세히 보기 →</a>
         </article>"""
-        for i, (_, eng_label, heading, lead, items) in enumerate(LEVELS)
+        for i, ((_, eng_label, heading, lead, items), key) in enumerate(zip(LEVELS, ["elementary", "middle", "high"]))
     )
     grades_html = "".join(
         f'<article><h3>{s} {g} 수학과외</h3><p>{body}</p></article>' for g, body in GRADES
@@ -185,7 +188,7 @@ def build(index, region):
         <h2>{s} 초·중·고<br>학교별 수학과외</h2>
         <p>{name}의 초등학교·중학교·고등학교 {school_total}곳 학생을 대상으로, 다니는 학교의 진도와 시험 범위, 출제 경향에 맞춰 수학 수업을 준비합니다.</p>
       </div>
-      <div class="school-cols">{school_columns(s, schools)}</div>
+      <div class="school-cols">{school_columns(s, schools, slug=slug)}</div>
       <p class="school-source">학교 목록 출처: 전국초중등학교위치표준데이터(2026.10 기준)</p>
     </section>
 """
@@ -344,9 +347,9 @@ def build(index, region):
 """
 
 
-def build_sitemap(school_urls):
+def build_sitemap(level_urls, school_urls):
     urls = [(f"{SITE}/", "weekly", "1.0")] + [(f"{SITE}/regions/{r[0]}.html", "monthly", "0.8") for r in REGIONS]
-    urls += [(u, "monthly", "0.6") for u in school_urls]
+    urls += [(u, "monthly", "0.7") for u in level_urls] + [(u, "monthly", "0.6") for u in school_urls]
     rows = "\n".join(
         f"  <url><loc>{loc}</loc><lastmod>{UPDATED}</lastmod><changefreq>{freq}</changefreq><priority>{prio}</priority></url>"
         for loc, freq, prio in urls
@@ -357,11 +360,13 @@ def build_sitemap(school_urls):
 if __name__ == "__main__":
     for i, region in enumerate(REGIONS):
         (ROOT / "regions" / f"{region[0]}.html").write_text(build(i, region), encoding="utf-8")
+    import build_levels
     import build_schools
+    level_urls = build_levels.write_all()
     school_urls = build_schools.write_all()
-    (ROOT / "sitemap.xml").write_text(build_sitemap(school_urls), encoding="utf-8")
+    (ROOT / "sitemap.xml").write_text(build_sitemap(level_urls, school_urls), encoding="utf-8")
     index = ROOT / "index.html"
     html = index.read_text(encoding="utf-8")
     start, end = html.index("<!-- schools:start -->"), html.index("<!-- schools:end -->") + len("<!-- schools:end -->")
     index.write_text(html[:start] + build_index_schools() + html[end:], encoding="utf-8")
-    print(f"{len(REGIONS)} region pages, {len(school_urls)} school pages + sitemap.xml written")
+    print(f"{len(REGIONS)} region pages, {len(level_urls)} level pages, {len(school_urls)} school pages + sitemap.xml written")

@@ -102,7 +102,8 @@ def build(school):
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "전북 수학과외", "item": f"{SITE}/"},
             {"@type": "ListItem", "position": 2, "name": f"{s} 수학과외", "item": f"{SITE}/regions/{slug}.html"},
-            {"@type": "ListItem", "position": 3, "name": f"{name} 수학과외", "item": url},
+            {"@type": "ListItem", "position": 3, "name": f"{s} {info['short']} 수학과외", "item": f"{SITE}/regions/{slug}-{school['level']}.html"},
+            {"@type": "ListItem", "position": 4, "name": f"{name} 수학과외", "item": url},
         ]},
         {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq_items]},
@@ -139,7 +140,7 @@ def build(school):
     <a class="back-link" href="../regions/{slug}.html">{s} 수학과외</a>
   </header>
   <main>
-    <nav class="breadcrumb" aria-label="현재 위치"><a href="../">전북 수학과외</a> › <a href="../regions/{slug}.html">{s} 수학과외</a> › <span>{name}</span></nav>
+    <nav class="breadcrumb" aria-label="현재 위치"><a href="../">전북 수학과외</a> › <a href="../regions/{slug}.html">{s} 수학과외</a> › <a href="../regions/{slug}-{school['level']}.html">{s} {info['short']} 수학과외</a> › <span>{name}</span></nav>
     <section class="hero school-hero" data-region="{info['short']}">
       <p class="eyebrow">{eng_label} MATH TUTORING</p>
       <h1>{name} 수학과외<br><em>{info['focus']} 1:1 맞춤 수업</em></h1>
