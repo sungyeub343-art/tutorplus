@@ -7,7 +7,7 @@ import json
 import math
 from pathlib import Path
 
-from build_regions import (GRADES, LEVELS, PHONE, REGIONS, ROOT, SITE, TEL, UPDATED,
+from build_regions import (FONT_LINKS, GRADES, LEVELS, PHONE, REGIONS, ROOT, SITE, TEL, UPDATED,
                            esc, jsonld)
 
 SCHOOLS = json.loads((ROOT / "_build" / "school_details.json").read_text(encoding="utf-8"))
@@ -114,6 +114,7 @@ def build(school):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(desc)}">
   <link rel="canonical" href="{url}">
@@ -128,6 +129,7 @@ def build(school):
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="icon" href="../assets/logo-mark.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+{FONT_LINKS}
   <link rel="stylesheet" href="../region-page.css">
   {jsonld(schema)}
 </head>

@@ -2,7 +2,7 @@
 
 build_regions.py 실행 시 함께 호출된다.
 """
-from build_regions import (PHONE, REGIONS, ROOT, SCHOOL_IDS, SCHOOLS, SITE, TEL,
+from build_regions import (FONT_LINKS, PHONE, REGIONS, ROOT, SCHOOL_IDS, SCHOOLS, SITE, TEL,
                            esc, jsonld)
 from build_schools import LEVEL_INFO
 
@@ -49,7 +49,7 @@ def build(region, level):
     schools = SCHOOLS[slug][level]
     _, _, _, lead, items = info["levels"]
     keywords = "·".join(kw.split(" ", 1)[1] for kw, _ in items[-3:])
-    title = f"{s} {short} 수학과외 | {keywords} 1:1"
+    title = f"{s} {short} 수학과외 | {keywords} 1:1 무료체험"
     desc = (f"{s} {short} 수학과외 – {s} {label} {len(schools)}곳 학생을 위한 1:1 {keywords} 맞춤 수업. "
             f"무료체험수업 전화 상담 {PHONE}.")
     faq_items = [(q.format(s=s), a) for q, a in FAQS[level]]
@@ -100,6 +100,7 @@ def build(region, level):
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="icon" href="../assets/logo-mark.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+{FONT_LINKS}
   <link rel="stylesheet" href="../region-page.css">
   {jsonld(schema)}
 </head>
@@ -175,7 +176,7 @@ def build(region, level):
     </section>
   </main>
   <footer class="site-footer">
-    <span>전북 수학과외 · 초등·중등·고등 1:1 맞춤 수학 코칭</span>
+    <span>전북 수학과외 · 초등·중등·고등 1:1 맞춤 수학 코칭 · <a href="../guides/">수학 공부 가이드</a></span>
     <span>© <span id="year">2026</span> TUTOR PLUS.</span>
   </footer>
   <a class="floating-phone" href="{TEL}">무료체험수업 상담 {PHONE}</a>

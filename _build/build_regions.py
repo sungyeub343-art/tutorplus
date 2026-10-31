@@ -10,7 +10,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://tutorplus.kr"
 PHONE = "010-2928-3614"
 TEL = "tel:01029283614"
-UPDATED = "2026-10-28"
+UPDATED = "2026-10-31"
+
+FONT_LINKS = """  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">"""
 
 # 전국초중등학교위치표준데이터(2026-10-26)에서 추출한 전북 운영 학교 목록
 SCHOOLS = json.loads((ROOT / "_build" / "schools.json").read_text(encoding="utf-8"))["regions"]
@@ -148,7 +152,7 @@ def build(index, region):
     slug, name, s, mark, eng, dongs = region
     url = f"{SITE}/regions/{slug}.html"
     dong_text = "·".join(dongs)
-    title = f"{s} 수학과외 | 초등·중등·고등 1:1 수학수업·내신·수능대비"
+    title = f"{s} 수학과외 | 초·중·고 1:1 맞춤 수업, 내신·수능대비 무료체험"
     desc = (f"{s} 수학과외 – {dong_text} 초등 기초수학, 중등 수학내신, 고등 수능수학까지 "
             f"학년별 1:1 맞춤 수학수업. 무료체험수업 전화 상담 {PHONE}.")
     faq_items = faqs(s, dongs)
@@ -255,6 +259,7 @@ def build(index, region):
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="icon" href="../assets/logo-mark.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+{FONT_LINKS}
   <link rel="stylesheet" href="../region-page.css">
   {jsonld(schema)}
 </head>
@@ -337,7 +342,7 @@ def build(index, region):
     </section>
   </main>
   <footer class="site-footer">
-    <span>전북 수학과외 · 초등·중등·고등 1:1 맞춤 수학 코칭</span>
+    <span>전북 수학과외 · 초등·중등·고등 1:1 맞춤 수학 코칭 · <a href="../guides/">수학 공부 가이드</a></span>
     <span>© <span id="year">2026</span> TUTOR PLUS.</span>
   </footer>
   <a class="floating-phone" href="{TEL}">무료체험수업 상담 {PHONE}</a>
@@ -347,9 +352,10 @@ def build(index, region):
 """
 
 
-def build_sitemap(level_urls, school_urls):
+def build_sitemap(level_urls, guide_urls):
     urls = [(f"{SITE}/", "weekly", "1.0")] + [(f"{SITE}/regions/{r[0]}.html", "monthly", "0.8") for r in REGIONS]
-    urls += [(u, "monthly", "0.7") for u in level_urls] + [(u, "monthly", "0.6") for u in school_urls]
+    # 학교별 페이지는 noindex 이므로 sitemap 에 넣지 않는다.
+    urls += [(u, "monthly", "0.7") for u in level_urls] + [(u, "weekly", "0.7") for u in guide_urls]
     rows = "\n".join(
         f"  <url><loc>{loc}</loc><lastmod>{UPDATED}</lastmod><changefreq>{freq}</changefreq><priority>{prio}</priority></url>"
         for loc, freq, prio in urls
@@ -360,13 +366,17 @@ def build_sitemap(level_urls, school_urls):
 if __name__ == "__main__":
     for i, region in enumerate(REGIONS):
         (ROOT / "regions" / f"{region[0]}.html").write_text(build(i, region), encoding="utf-8")
+    import build_guides
     import build_levels
     import build_schools
     level_urls = build_levels.write_all()
     school_urls = build_schools.write_all()
-    (ROOT / "sitemap.xml").write_text(build_sitemap(level_urls, school_urls), encoding="utf-8")
+    guide_urls = build_guides.write_all()
+    (ROOT / "sitemap.xml").write_text(build_sitemap(level_urls, guide_urls), encoding="utf-8")
     index = ROOT / "index.html"
     html = index.read_text(encoding="utf-8")
     start, end = html.index("<!-- schools:start -->"), html.index("<!-- schools:end -->") + len("<!-- schools:end -->")
-    index.write_text(html[:start] + build_index_schools() + html[end:], encoding="utf-8")
-    print(f"{len(REGIONS)} region pages, {len(level_urls)} level pages, {len(school_urls)} school pages + sitemap.xml written")
+    html = html[:start] + build_index_schools() + html[end:]
+    start, end = html.index("<!-- guides:start -->"), html.index("<!-- guides:end -->") + len("<!-- guides:end -->")
+    index.write_text(html[:start] + build_guides.index_block() + html[end:], encoding="utf-8")
+    print(f"{len(REGIONS)} region pages, {len(level_urls)} level pages, {len(school_urls)} school pages, {len(guide_urls)} guide pages + sitemap.xml written")

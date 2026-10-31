@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>전북 수학과외 수학 공부 가이드</title>
+    <link>https://tutorplus.kr/guides/</link>
+    <description>전북 초등·중등·고등 1:1 수학과외 TUTOR PLUS의 학년별 수학 공부 방법</description>
+    <language>ko</language>
+    <item>
+      <title>예비고1 겨울방학 수학 준비, 무엇부터 해야 할까</title>
+      <link>https://tutorplus.kr/guides/pre-high1-winter-math.html</link>
+      <guid>https://tutorplus.kr/guides/pre-high1-winter-math.html</guid>
+      <description>중3 겨울방학은 고등 수학의 첫 단추입니다. 중등 복습과 공통수학 선행의 비중, 주간 계획 예시를 정리했습니다.</description>
+      <pubDate>Sat, 31 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>중학교 수학 내신, 시험 4주 전부터 준비하는 방법</title>
+      <link>https://tutorplus.kr/guides/middle-school-exam-4weeks.html</link>
+      <guid>https://tutorplus.kr/guides/middle-school-exam-4weeks.html</guid>
+      <description>중간·기말고사 4주 전부터 시험 당일까지, 주차별로 무엇을 해야 하는지 정리한 중등 수학 내신 대비 계획입니다.</description>
+      <pubDate>Sat, 31 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>초등 수학 연산 실수, 습관부터 바꾸는 5가지 방법</title>
+      <link>https://tutorplus.kr/guides/elementary-calculation-mistakes.html</link>
+      <guid>https://tutorplus.kr/guides/elementary-calculation-mistakes.html</guid>
+      <description>알면서도 틀리는 초등 연산 실수는 대부분 습관에서 나옵니다. 집에서도 바로 해볼 수 있는 연산 실수 줄이는 방법입니다.</description>
+      <pubDate>Sat, 31 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>고등 수학 오답노트, 쓰는 것보다 다시 푸는 것이 중요합니다</title>
+      <link>https://tutorplus.kr/guides/high-school-wrong-answer-note.html</link>
+      <guid>https://tutorplus.kr/guides/high-school-wrong-answer-note.html</guid>
+      <description>시간만 많이 드는 오답노트 대신, 내신과 모의고사 점수로 이어지는 고등 수학 오답 관리 방법을 소개합니다.</description>
+      <pubDate>Sat, 31 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>수학과외와 수학학원, 우리 아이에게 맞는 선택 기준</title>
+      <link>https://tutorplus.kr/guides/tutoring-vs-academy.html</link>
+      <guid>https://tutorplus.kr/guides/tutoring-vs-academy.html</guid>
+      <description>수학학원과 1:1 수학과외는 장단점이 다릅니다. 학생의 성향과 현재 실력에 따라 무엇이 맞는지 판단하는 기준을 정리했습니다.</description>
+      <pubDate>Sat, 31 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>
